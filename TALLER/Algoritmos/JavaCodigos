@@ -1,0 +1,83 @@
+Programa Principal
+public class Demo01Libro {
+public static void main(String[] args) {
+        Libro libro = new Libro();
+        libro.setTitulo("Java: A Beginner's Guide");
+        libro.setEditorial("Mcgraw-Hill");
+        libro.setAñoEdicion(2014);
+        libro.setPrimerAutor("Herbert Schildt");
+        libro.setISBN("978-0071809252");
+        libro.setPrecio(21.72);
+        …
+    }  
+}
+
+Constructores
+                  public NombreClase( lista de parámetros formales ) {
+                            /* Código */    (Sintaxis)
+                  }
+Ej: Constructor Nulo
+     Public Libro () {
+}
+
+Ej: Constructor con Parametros
+public Subsidio (double unmonto,String unmotivo){
+        this.monto = unmonto;
+        this.motivo = unmotivo;
+        estado = false;
+    }
+Ej: 
+
+
+
+
+
+
+
+
+Parámetros: únicamente pasaje por valor
+        
+   a) Parámetro dato primitivo: 
+Parámetro formal recibe copia del valor del parámetro actual .
+Si se modifica el parámetro formal, no altera el parámetro actual. 
+
+      b) Parámetro objeto:
+Parámetro formal recibe copia de la referencia del parámetro actual. 
+Si se modifica el estado interno del objeto parám. formal, el cambio en el estado es visible en el parám. actual. 
+
+               public class Libro{
+                  … (Ejemplo de cuando se cambia un valor, se va a setear)
+               public void hacerDos(Libro l){
+                   l.setTitulo("otro");
+             }
+         }  
+b) Parámetro objeto:
+Parámetro formal recibe copia de la referencia del parámetro actual. 
+Si se modifica la referencia del parám. formal, el parám. actual sigue referenciando al mismo objeto. 
+
+                 public class Libro{
+                     … (Imprime Java)
+               public void hacerTres(Libro l){
+                      l= new Libro();
+                      l.setTitulo("otro");
+               }
+          }
+
+
+Interacción entre Objetos
+package EjercicioMicro;
+
+public class FlotaDeMicros {
+    private final int MAX = 15;
+    private Micro[] micros = new Micro[MAX];(Creamos un vector de Micros, y lo llenamos aca)              
+    private int microsEnFlota;
+
+
+// retorna un micro buscado (segun patente) o null en caso de no existir
+    public Micro buscarPatente(String patente){ (Interactuo con micro)
+        int i = 0;
+        while(i < microsEnFlota && !(micros[i].getPatente().equals(patente))){
+            i++;
+        }
+        return i >= microsEnFlota != null : micros[i];
+    }

@@ -1,0 +1,26 @@
+procedure busqueda (v:vector; dim:integer; cod:integer);
+
+var
+centro,inf,sup:integer;
+control:boolean;
+
+begin
+inf:=0;
+sup:= dim-1;
+control:= True;
+
+while (control) and (inf<=sup) do
+	begin
+	centro:= (((sup - inf) div 2) + inf);
+	if (v[centro].cod = cod) then
+		begin
+		writeln('Encontrado. DNI: ', v[centro].dni);
+		control:=False;
+		end
+	else
+		if (cod < v[centro].cod) then
+			sup:= centro -1
+		else
+			inf:= centro+1
+	end;
+end;

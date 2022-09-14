@@ -1,0 +1,9 @@
+procedure posOrden (a:arbol)
+begin
+if (a<>nil) then 
+	begin
+	posOrden(a^.HI);
+	posOrden(a^.HD);
+	writeln(a^.dato);
+	end;
+end;

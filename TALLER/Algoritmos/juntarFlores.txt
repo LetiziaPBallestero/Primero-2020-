@@ -1,0 +1,6 @@
+  proceso juntarFlores (ES flores:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:= flores + 1
+  fin

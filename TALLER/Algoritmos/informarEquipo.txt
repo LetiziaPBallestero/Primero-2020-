@@ -1,0 +1,20 @@
+  robot robotJefe
+  variables
+    quienSoy,ganador,equipo1:numero
+  comenzar
+    EnviarMensaje(1,robotPapel1)
+    EnviarMensaje(2,robotPapel2)
+    EnviarMensaje(1,robotFlor1)
+    EnviarMensaje(2,robotFlor2)
+    equipo1:=0
+    repetir 3
+      RecibirMensaje(quienSoy,*)
+      si (quienSoy = 1)
+        equipo1:=equipo1+1
+    RecibirMensaje(quienSoy,*)
+    si(equipo1 = 2)
+      Informar(1)
+    sino
+      Informar(2)
+  fin
+    

@@ -1,0 +1,9 @@
+procedure enOrden (a:arbol)
+begin
+if (a<>nil) then 
+	begin
+	enOrden(a^.HI);
+	writeln(a^.dato);
+	enOrden(a^.HD);
+	end;
+end;

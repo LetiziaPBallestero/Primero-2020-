@@ -1,0 +1,13 @@
+function busqueda (a:arbol;cant:integer):integer;
+
+begin
+if (a<>nil) then
+	begin
+	if (a^.dato.cant > cant) then
+		busqueda := 1 + busqueda(a^.HI,cant) + busqueda (a^.HD,cant)
+	else
+		busqueda:= 0 + busqueda(a^.HI,cant) + busqueda (a^.HD,cant);
+	end
+else
+	busqueda:=0;
+end;

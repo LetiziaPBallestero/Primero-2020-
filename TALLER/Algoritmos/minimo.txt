@@ -1,0 +1,18 @@
+procedure minimo (var v:vector; var e:entradas);
+
+var
+i,aux:integer;
+
+begin
+e.cod := 9999;
+for i:=1 to dias do
+	begin
+	if ((v[i]<>nil) and (v[i]^.dato.cod <= e.cod)) then
+		begin
+		aux:=i;
+		e:=v[i]^.dato;
+		end;
+	end;
+if (e.cod<>9999) then
+	v[aux]:= v[aux]^.sig;	
+end;

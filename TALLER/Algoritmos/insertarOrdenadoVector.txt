@@ -1,0 +1,19 @@
+procedure insercion (var v:vector; dim:integer);
+
+var
+j,i:integer;
+actual:dato;
+
+begin
+for i:=2 to dim do
+	begin
+	actual:=v[i];
+	j:=i-1;
+	while (j>0) and (v[j].cod > actual.cod) do
+		begin
+		v[j+1]:=v[j];
+		j:=j-1;
+		end;
+	v[j+1]:=actual;
+	end;
+end;

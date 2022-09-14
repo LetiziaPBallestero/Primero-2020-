@@ -1,0 +1,21 @@
+procedure mergeConCorte (var v:vector; var l:lista2);
+
+var
+e,actual:entradas;
+total:integer;
+
+begin
+l:=nil;
+minimo(v,e);
+while (e.cod<>9999) do
+	begin
+	actual:=e;
+	total:=0;
+	while (e.cod<>9999) and (e.cod = actual.cod) do
+		begin
+		total:= total+1;
+		minimo(v,e);
+		end;
+	agregarAdelante(l,actual,total);
+	end;
+end;

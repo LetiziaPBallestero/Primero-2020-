@@ -1,0 +1,26 @@
+  robot jefe
+  variables
+    quienSoy,cant,min,IDmin:numero
+  comenzar
+    cant:=0
+    EnviarMensaje(1,robotFlor1)
+    EnviarMensaje(2,robotFlor2)
+    EnviarMensaje(3,robotPapel1)
+    EnviarMensaje(4,robotPapel2)
+    min:=999
+    repetir 4
+      RecibirMensaje(quienSoy,*)
+      si(quienSoy=1)
+        RecibirMensaje(cant,robotFlor1)
+      sino
+        si(quienSoy=2)
+          RecibirMensaje(cant,robotFlor2)
+        sino
+          si (quienSoy=3)
+            RecibirMensaje(cant,robotPapel1)
+          sino
+            si (quienSoy=4)
+              RecibirMensaje(cant,robotPapel2)
+      minimo(cant,quienSoy,IDmin,min)
+    Informar(IDmin)
+  fin

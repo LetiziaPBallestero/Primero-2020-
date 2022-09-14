@@ -1,0 +1,6 @@
+  proceso juntarPapeles (ES papeles: numero)
+  comenzar
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:= papeles+1
+  fin

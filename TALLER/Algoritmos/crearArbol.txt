@@ -1,0 +1,17 @@
+procedure crearArbol (var a:arbol; cod:integer; cant:integer);
+
+begin
+if (a=nil) then
+	begin
+	new(a);
+	a^.dato.cod:=cod;
+	a^.dato.cant:=cant;
+	a^.HI:=nil;
+	a^.HD:=nil;
+	end
+else
+	if (cod<a^.dato.cod) then
+		crearArbol(a^.HI,cod,cant)
+	else
+		crearArbol(a^.HD,cod,cant)
+end;
