@@ -1,0 +1,42 @@
+procedure insertarOrdenado (var p:lista; n:dato);
+var
+aux,ant,act:lista;
+
+begin
+new(aux);
+aux^.elem:=n;
+aux^.sig:=nil;
+ant:=p;
+act:=p;
+
+while (act<>nil) and (act^.elem.numero<aux^.elem.numero) do
+  begin
+  ant:=act;
+  act:=act^.sig;
+  end;
+
+if (act=ant) then  // principio o lista vacia
+  p:=aux
+else  // medio o final
+  ant^.sig:=aux;
+aux^.sig:=act;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

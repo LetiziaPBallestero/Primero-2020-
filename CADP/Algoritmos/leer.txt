@@ -1,0 +1,28 @@
+procedure leer (var n:dato);
+begin
+writeln('Ingrese codigo');
+readln(n.cod);
+if (n.cod<>-1) then
+	begin
+	writeln('Ingrese dni');
+	readln(n.dni);
+	writeln('Ingrese nombre y apellido');
+	readln(n.nomYape);
+end;
+
+
+//main
+
+lsita:=nil;
+leer(dato);
+while (dato.cod<>-1) do
+	begin
+	insertarOrdenado(lista,dato);
+	leer(dato);
+	end;
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+procedure minimos (var min1,min2:integer; valor:integer);
+begin
+  if (total<min1) then
+    begin
+    min2:=min1;
+    min1:=valor;
+    end;
+  else
+    if (valor<min2) then
+      min2:=valor;
+    end;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

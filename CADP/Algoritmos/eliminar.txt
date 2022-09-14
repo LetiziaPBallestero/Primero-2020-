@@ -1,0 +1,36 @@
+procedure eliminar (var p:lista; valor:integer);
+var
+act,ant:lista;
+
+begin
+act:=p;
+while (act<>nil) and (act^.elem.numero<>valor) do
+  begin
+  ant:=act;
+  act:=act^.sig;
+  end;
+if (act<>nil) then
+  begin
+  if (act=p) then
+    p:=p^.sig;
+  else
+    ant^.sig:=act^.sig;
+  dispose(act);
+  end;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

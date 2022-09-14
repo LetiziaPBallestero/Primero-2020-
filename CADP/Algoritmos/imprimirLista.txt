@@ -1,0 +1,9 @@
+procedure imprimirLista (p:lista):
+
+begin
+while (p <> nil) do
+	begin
+	writeln(p^.elem);
+	p:= p^.sig;
+	end;
+end;

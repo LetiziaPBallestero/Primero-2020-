@@ -1,0 +1,49 @@
+procedure agregarDescendente (var v:vector; diml;integer; d:integer);
+
+var
+act,pos:integer;
+
+begin
+//buscar
+act:=1;
+while (act<diml) and (v[act]>d) do
+	act:=act+1
+//correr
+for pos:=diml downto act+1 do
+	v[pos]:= v[pos-1];
+//insertar
+v[act]:=d;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

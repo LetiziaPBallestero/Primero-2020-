@@ -1,0 +1,20 @@
+procedure agregarAlFinal2 (var p,ult:lista; d:dato);
+
+var
+aux:lista;
+
+begin
+new(aux);
+aux^.elem:=d;
+aux^.sig:=nil:
+
+if (p = nil) then
+	p:= aux;
+else
+	ult^.sig:=aux;
+ult:=aux;
+end;
+
+
+
+

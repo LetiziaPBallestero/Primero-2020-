@@ -1,0 +1,29 @@
+function buscar (p:lista; valor:integer):boolean;
+var
+encontre:boolean;
+
+begin
+encontre:=false;
+while (p<>nil) and (encontre=false) do
+  begin
+  if (p^.elem.numero=valor) then
+    encontre:=true;
+  else
+    p:=p^.sig;
+  end;
+buscar:=encontre;
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
