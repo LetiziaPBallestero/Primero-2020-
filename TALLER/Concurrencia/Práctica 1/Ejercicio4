@@ -1,0 +1,72 @@
+programa Ejercicio4
+procesos
+  proceso  juntarflor(E flor:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor     
+  fin
+  proceso juntarpapel(E papel:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso limpiarFlores(E flor:numero)
+  comenzar
+    repetir 24
+      repetir 99
+        juntarflor(flor)
+        mover
+      juntarflor(flor)
+      Pos(PosAv+1,1)
+    repetir 99
+      juntarflor(flor)
+      mover
+    juntarflor(flor)
+  fin
+  proceso limpiarPapel(E papel:numero)
+  comenzar
+    repetir 24
+      repetir 99
+        juntarpapel(papel)
+        mover
+      juntarpapel(papel)
+      Pos(PosAv+1,1)
+    repetir 99
+      juntarpapel(papel)
+      mover
+    juntarpapel(papel)
+  fin
+areas
+  a1 : AreaP(1,1,25,100)
+  a2 : AreaP(26,1,50,100)
+  a3 : AreaP(51,1,75,100)
+  a4 : AreaP(76,1,100,100)
+robots
+  robot tipo1
+  variables
+    flor:numero
+  comenzar
+    limpiarFlores(flor)
+    Pos(51,1)
+    limpiarFlores(flor)
+  fin
+  robot tipo2
+  variables
+    papel:numero
+  comenzar
+    limpiarPapel(papel)
+    Pos(76,1)
+    limpiarPapel(papel)
+  fin
+
+variables
+  r1:tipo1
+  r2:tipo2
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r1,a3)
+  AsignarArea(r2,a4)
+  Iniciar(r1,1,1)
+  Iniciar(r2,26,1)
+fin

@@ -1,0 +1,73 @@
+programa Ejercicio2
+procesos 
+
+  proceso limpiarEsquina (ES papeles : numero ; ES flores : numero)
+  comenzar 
+    mientras (HayPapelEnLaEsquina)
+      tomarPapel 
+      papeles := papeles + 1 
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores := flores + 1 
+  fin 
+
+  proceso girar (E n : numero)
+  comenzar
+    repetir n 
+      derecha 
+  fin
+
+  proceso escalon (E alto : numero ; ES papeles : numero ; ES flores : numero)
+  comenzar
+    derecha
+    limpiarEsquina (papeles , flores)
+    mover 
+    girar (3)
+    repetir alto 
+      limpiarEsquina (papeles , flores)
+      mover 
+  fin
+areas
+  AT:AreaPC(2,1,99,99)
+  AJ : AreaP (1,1,1,1)
+robots
+  robot Escalador 
+  variables 
+    papeles , flores : numero 
+    alto , escalones: numero 
+  comenzar 
+    escalones := 0 
+    repetir 4
+      Random (alto , 1 , 5)
+      papeles := 0 
+      flores := 0 
+      escalon (alto , papeles , flores) 
+      si (flores > papeles)
+        escalones := escalones + 1
+    EnviarMensaje (escalones , RJ)
+  fin
+
+  robot Jefe 
+  variables 
+    escalonesSUMA , escalonC : numero 
+  comenzar 
+    repetir 3
+      RecibirMensaje (escalonC , *)
+      escalonesSUMA := escalonesSUMA + escalonC
+    Informar (escalonesSUMA)
+  fin 
+variables 
+  R1 : Escalador 
+  R2 : Escalador 
+  R3 : Escalador 
+  RJ : Jefe 
+comenzar 
+  AsignarArea(R1,AT)
+  AsignarArea(R2,AT)
+  AsignarArea(R3,AT)
+  AsignarArea(RJ,AJ)
+  Iniciar (R1,2,1)
+  Iniciar (R2,7,1)
+  Iniciar (R3,12,1)
+  Iniciar (RJ,1,1)
+fin 

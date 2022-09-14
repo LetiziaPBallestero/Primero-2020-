@@ -1,0 +1,100 @@
+programa ejercicio5
+procesos
+  proceso  juntarflor(E flor:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso  juntarpapel(E papel:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso  depositarF(E flor:numero)
+  comenzar
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+  proceso  depositarP(E papel:numero)
+  comenzar
+    mientras(HayPapelEnLaBolsa)
+      depositarPapel
+  fin
+  proceso  recorrerF(E flor:numero)
+  comenzar
+    repetir 20
+      juntarflor(flor)
+      mover
+    juntarflor(flor)
+  fin
+  proceso  recorrerP(E papel:numero)
+  comenzar
+    repetir 20
+      juntarpapel(papel)
+      mover
+    juntarpapel(papel)
+  fin
+areas
+  ciudad1:AreaC(1,1,100,100)
+robots
+  robot tipo1
+  variables
+    flor:numero
+  comenzar
+    derecha
+    recorrerF(flor)
+    depositarF(flor)
+    Pos(1,80)
+    recorrerF(flor)
+    depositarF(flor)
+  fin
+  robot tipo2
+  variables
+    papel:numero
+  comenzar
+    recorrerP(papel)
+    Pos(75,80)
+    depositarP(papel)
+    Pos(80,80)
+    recorrerP(papel)
+    Pos(80,80)
+    depositarP(papel)
+  fin
+  robot tipo3
+  variables
+    flor:numero
+  comenzar
+    derecha
+    recorrerF(flor)
+    depositarF(flor)
+    Pos(80,15)
+    recorrerF(flor)
+    depositarF(flor)
+  fin
+  robot tipo4
+  variables
+    papel:numero
+  comenzar
+    recorrerP(papel)
+    Pos(10,1)
+    depositarP(papel)
+    Pos(15,1)
+    recorrerP(papel)
+    Pos(15,1)
+    depositarP(papel)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+  r3:tipo3
+  r4:tipo4
+comenzar
+  AsignarArea(r1,ciudad1)
+  AsignarArea(r2,ciudad1)
+  AsignarArea(r3,ciudad1)
+  AsignarArea(r4,ciudad1)
+  Iniciar(r1,1,75)
+  Iniciar(r2,75,80)
+  Iniciar(r3,80,10)
+  Iniciar(r4,10,1)
+fin

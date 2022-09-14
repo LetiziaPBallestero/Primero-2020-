@@ -1,0 +1,107 @@
+programa ejercicio4a
+procesos
+  proceso  juntarflor(E flor:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor     
+  fin
+  proceso juntarpapel(E papel:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso limpiarareaF(E flor:numero)
+  comenzar
+    repetir 4
+      repetir 99
+        juntarflor(flor)
+        mover
+      juntarflor(flor)
+      Pos(PosAv+1,1)
+    repetir 99
+      juntarflor(flor)
+      mover
+    juntarflor(flor)
+  fin
+  proceso limpiarareaP(E papel:numero)
+  comenzar
+    repetir 4
+      repetir 99
+        juntarpapel(papel)
+        mover
+      juntarpapel(papel)
+      Pos(PosAv+1,1)
+    repetir 99
+      juntarpapel(papel)
+      mover
+    juntarpapel(papel)
+  fin
+areas
+  ciudad1:AreaP(1,1,5,100)
+  ciudad2:AreaP(6,1,10,100)
+  ciudad3:AreaP(11,1,15,100)
+  ciudad4:AreaP(16,1,20,100)
+  ciudad5:AreaP(21,1,25,100)
+  ciudad6:AreaP(26,1,30,100)
+  ciudad7:AreaP(31,1,35,100)
+  ciudad8:AreaP(36,1,40,100)
+  ciudad9:AreaP(41,1,45,100)
+  ciudad10:AreaP(46,1,50,100)
+  ciudad11:AreaP(51,1,55,100)
+  ciudad12:AreaP(56,1,60,100)
+  ciudad13:AreaP(61,1,65,100)
+  ciudad14:AreaP(66,1,70,100)
+  ciudad15:AreaP(71,1,75,100)
+  ciudad16:AreaP(76,1,80,100)
+  ciudad17:AreaP(81,1,85,100)
+  ciudad18:AreaP(86,1,90,100)
+  ciudad19:AreaP(91,1,95,100)
+  ciudad20:AreaP(96,1,100,100)        
+robots
+  robot tipo1
+  variables
+    flor:numero
+    papel:numero
+  comenzar
+    repetir 9
+      limpiarareaF(flor)
+      Pos(PosAv+6,1)
+    limpiarareaF(flor)
+  fin
+  robot tipo2
+  variables
+    flor:numero
+    papel:numero
+  comenzar
+    repetir 9
+      limpiarareaP(papel)
+      Pos(PosAv+6,1)
+    limpiarareaP(papel)
+  fin
+variables
+  r1:tipo1
+  r2:tipo2
+comenzar
+  AsignarArea(r1,ciudad1)
+  AsignarArea(r2,ciudad2)
+  AsignarArea(r1,ciudad3)
+  AsignarArea(r2,ciudad4)
+  AsignarArea(r1,ciudad5)
+  AsignarArea(r2,ciudad6)
+  AsignarArea(r1,ciudad7)
+  AsignarArea(r2,ciudad8)
+  AsignarArea(r1,ciudad9)
+  AsignarArea(r2,ciudad10)
+  AsignarArea(r1,ciudad11)
+  AsignarArea(r2,ciudad12)
+  AsignarArea(r1,ciudad13)
+  AsignarArea(r2,ciudad14)
+  AsignarArea(r1,ciudad15)
+  AsignarArea(r2,ciudad16)
+  AsignarArea(r1,ciudad17)
+  AsignarArea(r2,ciudad18)
+  AsignarArea(r1,ciudad19)
+  AsignarArea(r2,ciudad20)
+  Iniciar(r1,1,1)
+  Iniciar(r2,6,1)
+fin

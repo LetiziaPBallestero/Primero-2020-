@@ -1,0 +1,405 @@
+package practica_adicional_poo;
+
+import PaqueteLectura.*;
+public class Ejercicio2 {
+
+    public static void main(String[] args) {
+        Coro cuatroCoros[] = new Coro[1];
+        Director dire = new Director("Juan Salguero", 3344, 56, 50);
+
+        for(int i = 0; i < 1; i++) {
+
+            System.out.println("Ingrese tipo de coro (1 para orquestal o 2 para coro circular)");
+            int respuesta = Lector.leerInt();
+
+            int filas = 0;
+            int columnas = 0;
+
+            int largo = 0; // para circular
+
+            Coro co = null;
+
+            switch(respuesta) {
+                case 1: System.out.println("Ingrese filas: ");
+                        filas = Lector.leerInt();
+                        System.out.println("Ingrese columnas: ");
+                        columnas = Lector.leerInt();
+                        co = new CoroHileras(dire, filas, columnas);
+                        break;
+                case 2: System.out.println("Ingrese la cantidad de coristas: ");
+                        largo = Lector.leerInt();
+                        co = new CoroSemiCirculo(dire, largo);
+                        break;
+            }
+
+            cuatroCoros[i] = co;
+
+            boolean seguir = false;
+
+            while(!seguir) {
+                    System.out.println("Ingrese nombre:");
+                    String nombre = Lector.leerString();
+                    System.out.println("Ingrese dni:");
+                    int dni = Lector.leerInt();
+                    System.out.println("Ingrese edad:");
+                    int edad = Lector.leerInt();
+                    System.out.println("Ingrese tono:");
+                    int tono = Lector.leerInt();
+
+                    Corista c = new Corista(nombre, dni, edad, tono);
+
+                    cuatroCoros[i].agregarCorista(c);
+                    
+                    if(!cuatroCoros[i].coroLleno()) {
+                        System.out.println("Seguir? 1 / 2");
+                        int s = Lector.leerInt();
+                        if(s != 1) {
+                            seguir = true;
+                        }
+                    } else {
+                        seguir = true;
+                    }
+            }
+            
+        }
+        
+        for(int i = 0; i < 1; i++) {
+            System.out.println(cuatroCoros[i].toString());
+        }
+    }
+    
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+
+public abstract class Coro {
+    private String nombre;
+    private Director director;
+    private int cantidadDeCoristas;
+    private int dimL;
+    
+    public Coro(String nombre, Director d, int cantidadDeCoristas) {
+        this.setNombre(nombre);
+        this.setDirector(d);
+        this.setCantidadDeCoristas(cantidadDeCoristas);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Director getDirector() {
+        return director;
+    }
+
+    public void setDirector(Director director) {
+        this.director = director;
+    }
+
+    public int getCantidadDeCoristas() {
+        return cantidadDeCoristas;
+    }
+
+    public void setCantidadDeCoristas(int cantidadDeCoristas) {
+        this.cantidadDeCoristas = cantidadDeCoristas;
+    }
+
+    public int getDimL() {
+        return dimL;
+    }
+
+    public void setDimL(int dimL) {
+        this.dimL = dimL;
+    }
+    
+    
+    
+    public abstract void agregarCorista(Corista c);
+    public abstract boolean coroLleno();
+    public abstract boolean coroBienFormado();
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+public abstract class Persona {
+    private String nombre;
+    private int dni;
+    private int edad;
+    
+    public Persona(String nombre, int dni, int edad) {
+        this.setNombre(nombre);
+        this.setDni(dni);
+        this.setEdad(edad);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+    
+    @Override
+    public String toString() {
+        String aux = this.getNombre() + " | " + this.getDni() + " | " + this.getEdad() + " ";
+        return aux;
+    }
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+public class Corista extends Persona {
+    private int tonoFundamental;
+    
+    public Corista(String nombre, int dni, int edad, int tonoFundamental) {
+        super(nombre, dni, edad);
+        this.setTonoFundamental(tonoFundamental);
+    }
+
+    public int getTonoFundamental() {
+        return tonoFundamental;
+    }
+
+    public void setTonoFundamental(int tonoFundamental) {
+        this.tonoFundamental = tonoFundamental;
+    }
+    
+    @Override
+    public String toString() {
+        String aux = super.toString();
+        aux = aux + " | " + this.getTonoFundamental();
+        return aux;
+    }
+    
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+public class Director extends Persona {
+    
+    private int antiguedad;
+    
+    public Director(String nombre, int dni, int edad, int antiguedad) {
+        super(nombre, dni, edad);
+        this.setAntiguedad(antiguedad);
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
+    }
+
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
+    }
+
+    @Override
+    public String toString() {
+        String aux = super.toString();
+        aux = aux + " | " + this.getAntiguedad();
+        return aux;
+    }
+    
+    
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+public class CoroSemiCirculo extends Coro {
+    
+    private Corista coro[];
+        
+    
+    public CoroSemiCirculo(Director d, int cantidadDeCoristas) {
+        super("", d, cantidadDeCoristas);
+        this.coro = new Corista[this.getCantidadDeCoristas()];
+        for(int i = 0; i < this.getCantidadDeCoristas(); i++) {
+            coro[i] = null;
+        }
+        this.setDimL(0);
+    }
+    
+    @Override
+    public void agregarCorista(Corista c) {
+        if(this.getDimL() < this.getCantidadDeCoristas()) {
+                this.coro[this.getDimL()] = c;
+                this.setDimL(this.getDimL() + 1);
+        }
+    }
+
+    @Override
+    public boolean coroLleno() {
+         if(this.getDimL() == this.getCantidadDeCoristas()) {
+                return true;
+            } else {
+                return false;
+            }
+    }
+       
+    
+
+    @Override
+    public boolean coroBienFormado() {
+        if(this.coroLleno()) {
+                for(int i = 0; i < (this.getCantidadDeCoristas()- 1); i++) {
+                    if(this.coro[i].getTonoFundamental() > this.coro[i + 1].getTonoFundamental() ) {
+                            return false;
+                        }
+                        
+                }
+            }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String aux = this.getNombre() + " | Director: " + this.getDirector().toString() + "\n";
+        for(int i = 0; i < this.getDimL(); i++) {
+            aux = aux + this.coro[i].toString() + "# \n";
+        }
+        return aux;
+    }
+    
+    
+    
+}
+
+--------------------------------------------------------------------------------------------------
+
+package practica_adicional_poo;
+
+public class CoroHileras extends Coro {
+    
+    private Corista coro[][];
+    private int filasCoro;
+    private int columnCoro;
+
+    public CoroHileras(Director d, int filas, int columnas) {
+        super("", d, (filas * columnas));
+        this.coro = new Corista[filas][columnas];
+        for(int i = 0; i < filas; i++) {
+            for(int j = 0; j < columnas; j++) {
+                this.coro[i][j] = null;
+            }
+        }
+        this.setDimL(0);
+        this.setFilasCoro(filas);
+        this.setColumnCoro(columnas);
+    }
+
+    public int getFilasCoro() {
+        return filasCoro;
+    }
+
+    public void setFilasCoro(int filasCoro) {
+        this.filasCoro = filasCoro;
+    }
+
+    public int getColumnCoro() {
+        return columnCoro;
+    }
+
+    public void setColumnCoro(int columnCoro) {
+        this.columnCoro = columnCoro;
+    }
+    
+       
+    @Override
+    public void agregarCorista(Corista c) {
+        if(this.getDimL() < this.getCantidadDeCoristas()) {
+            int i = 0;
+                int j = 0;
+                boolean agregado = false;
+
+                while(i < this.getFilasCoro() && !agregado){
+                    j = 0;
+                    while(j < this.getColumnCoro() && !agregado) {
+                        if(this.coro[i][j] == null) {
+                            this.coro[i][j] = c;
+                            this.setDimL(this.getDimL() + 1);
+                            agregado = true;
+                        } else {
+                            j = j + 1;
+                        }
+                    }
+
+                    i = i + 1;
+                }
+        }
+    }
+
+    @Override
+    public boolean coroLleno() {
+        if(this.getDimL() == this.getCantidadDeCoristas()) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    @Override
+    public boolean coroBienFormado() {
+        if(this.coroLleno()) {
+            for(int i = 0; i < this.getFilasCoro() - 1; i++) {
+                for(int j = 0; j < this.getColumnCoro() - 1; j++ ) {
+                    if(this.coro[i][j].getTonoFundamental() != this.coro[i][j + 1].getTonoFundamental()) {
+                        return false;
+                    }
+                    if(this.coro[i][j].getTonoFundamental() > this.coro[i + 1][j].getTonoFundamental()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String aux = " " + this.getNombre() + " | Director : " + this.getDirector().toString() + " | \n";
+        
+        for(int i = 0; i < this.getFilasCoro(); i++) {
+            for(int j = 0; j < this.getColumnCoro(); j++) {
+                if(this.coro[i][j] != null) {
+                    aux = aux + this.coro[i][j].toString() + "# \n";
+                }
+            }
+        }
+        
+        return aux;
+    }
+    
+    
+}

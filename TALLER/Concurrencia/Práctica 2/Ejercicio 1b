@@ -1,0 +1,95 @@
+programa Ejercicio1-b
+procesos 
+  proceso juntarFlores (ES flores : numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores := flores + 1 
+  fin
+  proceso hacerAvenida (ES flores : numero)
+  comenzar 
+    repetir 9 
+      juntarFlores (flores)
+      mover
+    juntarFlores (flores)
+  fin
+  proceso evaluar (E flores1:numero ; E flores2:numero ; E diferencia:numero ; E numR1 : numero ; E numR2 : numero)
+  comenzar
+    si (flores1 > flores2)
+      diferencia := flores1 - flores2
+      Informar (diferencia)
+      Informar (1)
+
+    si (flores2 > flores1)
+      diferencia := flores2 - flores1 
+      Informar (diferencia)
+      Informar (2)
+      
+  fin
+areas 
+  A1 : AreaP (1,1,1,10)
+  A2 : AreaP (2,11,2,20)
+  A3 : AreaP (2,1,2,1)
+robots 
+  robot robot1
+  variables 
+    flores , id : numero
+  comenzar
+    RecibirMensaje (id , R3)
+    flores := 0 
+    Pos (1,1)
+    hacerAvenida (flores)
+    EnviarMensaje (id , R3)
+    EnviarMensaje (flores , R3)
+  fin
+  robot robot2
+  variables 
+    flores , id : numero 
+  comenzar 
+    RecibirMensaje (id , R3)
+    flores := 0 
+    Pos (2,11)
+    hacerAvenida (flores)
+    EnviarMensaje (id , R3)
+    EnviarMensaje (flores , R3)
+  fin
+  robot fiscal 
+  variables
+    flores1 , flores2 , diferencia : numero 
+    numR1 , numR2 , numR : numero
+  comenzar 
+    numR1 := 1 
+    numR2 := 2 
+    numR := 0 
+    EnviarMensaje (numR1 , R1)
+    EnviarMensaje (numR2 , R2)
+    flores1 := 0 
+    flores2 := 0 
+    diferencia := 0 
+
+    RecibirMensaje (numR , *)
+    si (numR = numR1)
+      RecibirMensaje (flores1 , *)
+    si (numR = numR2)
+      RecibirMensaje (flores2 , R2)
+    
+    RecibirMensaje (numR , *)
+    si (numR = numR1)
+      RecibirMensaje (flores1 , *)
+    si (numR = numR2)
+      RecibirMensaje (flores2 , R2)
+
+    evaluar (flores1 , flores2 , diferencia , numR1 , numR2)
+  fin
+variables 
+  R1 : robot1
+  R2 : robot2 
+  R3 : fiscal
+comenzar 
+  AsignarArea (R1 , A1)
+  AsignarArea (R2 , A2)
+  AsignarArea (R3 , A3)
+  Iniciar (R1,1,1)
+  Iniciar (R2,2,11)
+  Iniciar (R3,2,1)
+fin

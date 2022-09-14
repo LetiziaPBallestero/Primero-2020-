@@ -1,0 +1,110 @@
+programa azulVerdoso
+procesos
+  proceso  juntarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel  
+  fin
+
+  proceso  juntarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor  
+  fin
+
+areas 
+  zona0: AreaP(1,1,1,1)
+  zonaA: AreaPC(3,4,13,24)   
+  zonaV: AreaPC(17,4,27,24)
+
+robots
+  robot tipoFlor
+  variables
+    ID: numero
+  comenzar
+    derecha
+    RecibirMensaje(ID, fiscalizador)
+    repetir 3
+      juntarFlores
+      mover
+    BloquearEsquina(PosAv + 1, PosCa)  
+    mover
+    juntarFlores
+    mover
+    LiberarEsquina(PosAv - 1, PosCa)
+    repetir 5
+      juntarFlores
+      mover 
+    juntarFlores  
+    EnviarMensaje(ID, fiscalizador)               
+  fin
+
+  robot tipoPapel
+  variables
+    ID: numero
+  comenzar
+    RecibirMensaje(ID, fiscalizador)
+    juntarPapeles
+    mover
+    juntarPapeles
+    BloquearEsquina(PosAv, PosCa + 1)
+    mover
+    juntarPapeles
+    mover
+    LiberarEsquina(PosAv, PosCa - 1)
+    repetir 17
+      juntarPapeles
+      mover
+    juntarPapeles  
+    EnviarMensaje(ID, fiscalizador)                
+  fin
+
+  robot tipoMariscal
+  variables
+    ID, EQ1, EQ2, ganador: numero
+  comenzar
+    EnviarMensaje(1, floreroA)
+    EnviarMensaje(2, floreroV)
+    EnviarMensaje(2, papeleroV)
+    EnviarMensaje(1, papeleroA)
+
+    EQ1:= 0 
+    EQ2:= 0
+    ganador:= 0
+    repetir 3
+      RecibirMensaje(ID, *)    
+      si(ID = 1)
+        si(EQ1 = 0)
+          EQ1:= EQ1 + 1    
+        sino 
+          ganador:= EQ1
+      sino 
+        si(EQ2 = 0)    
+          EQ2:= EQ2 + 1
+        sino    
+          ganador:= EQ2 + 1
+    RecibirMensaje(ID, *)
+    si(ganador <> 0)
+      Informar(ganador)
+  fin
+
+variables
+  floreroA: tipoFlor
+  floreroV: tipoFlor
+  papeleroA: tipoPapel
+  papeleroV: tipoPapel
+  fiscalizador: tipoMariscal  
+
+comenzar
+  AsignarArea(fiscalizador, zona0)
+  AsignarArea(floreroA, zonaA)
+  AsignarArea(papeleroA, zonaA)
+  AsignarArea(floreroV, zonaV)
+  AsignarArea(papeleroV, zonaV)
+
+  Iniciar(fiscalizador, 1,1)
+  Iniciar(floreroA, 3,6)
+  Iniciar(floreroV, 17,6)
+  Iniciar(papeleroA, 7,4)
+  Iniciar(papeleroV, 21,4)
+fin

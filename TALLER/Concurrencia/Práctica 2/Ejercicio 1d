@@ -1,0 +1,86 @@
+programa Ejercicio1d
+procesos 
+
+  proceso juntarFlores (ES flores : numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores := flores + 1 
+  fin
+
+  proceso hacerAvenida (ES flores : numero)
+  comenzar 
+    repetir 9 
+      juntarFlores (flores)
+      mover
+    juntarFlores (flores)
+  fin
+
+areas 
+  A1 : AreaP (1,1,1,10)
+  A2 : AreaP (2,11,2,20)
+  A3 : AreaP (3,21,3,30)
+  A4 : AreaP (4,31,4,40)
+  A5 : AreaP (5,41,5,50)
+  A6 : AreaP (6,51,6,60)
+  AF : AreaP (2,1,2,1)
+
+robots 
+  robot Competidor
+  variables 
+    flores , id : numero
+  comenzar
+    RecibirMensaje (id , RF)
+    flores := 0 
+    hacerAvenida (flores)
+    EnviarMensaje (id , RF)
+    EnviarMensaje (flores , RF)
+  fin
+
+  robot Fiscal 
+  variables
+    floresACT , floresMAX: numero
+    id , idMAX : numero
+  comenzar 
+    EnviarMensaje (1,R1)
+    EnviarMensaje (2,R2)
+    EnviarMensaje (3,R3)
+    EnviarMensaje (4,R4)
+    EnviarMensaje (5,R5)
+    EnviarMensaje (6,R6)
+
+    floresMAX := -1 
+
+    repetir 6
+      RecibirMensaje (id , *)
+      RecibirMensaje (floresACT , *)
+      si (floresACT > floresMAX) 
+        idMAX := id
+        floresMAX := floresACT
+    Informar (floresMAX)
+    Informar (idMAX)
+  fin
+variables
+  R1 : Competidor
+  R2 : Competidor
+  R3 : Competidor
+  R4 : Competidor
+  R5 : Competidor
+  R6 : Competidor
+  RF : Fiscal
+comenzar 
+  AsignarArea (R1 , A1)
+  AsignarArea (R2 , A2)
+  AsignarArea (R3 , A3)
+  AsignarArea (R4 , A4)
+  AsignarArea (R5 , A5)
+  AsignarArea (R6 , A6)
+  AsignarArea (RF , AF)
+  Iniciar (R1,1,1)
+  Iniciar (R2,2,11)
+  Iniciar (R3,3,21)
+  Iniciar (R4,4,31)
+  Iniciar (R5,5,41)
+  Iniciar (R6,6,51)
+  Iniciar (RF,2,1)
+fin

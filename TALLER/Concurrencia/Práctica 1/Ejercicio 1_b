@@ -1,0 +1,78 @@
+programa Ejercicio1_a
+procesos 
+  proceso juntar (ES flor:numero)
+  comenzar
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flor:= flor + 1
+  fin   
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot tipo1
+  variables
+    flores : numero  
+    noHay : numero
+  comenzar
+    flores:= 0
+    noHay:= 0 
+    repetir 99
+      si (HayFlorEnLaEsquina)
+        juntar (flores)
+      sino 
+        noHay := noHay + 1
+      mover
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+    Informar (flores)
+    Informar (noHay)
+  fin
+  robot tipo2
+  variables
+    flores : numero  
+    noHay : numero
+  comenzar
+    flores:= 0
+    noHay:= 0 
+    repetir 99
+      si (HayFlorEnLaEsquina)
+        juntar (flores)
+      sino 
+        noHay := noHay + 1
+      mover
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+    Informar (flores)
+    Informar (noHay)
+  fin
+  robot tipo3
+  variables
+    flores : numero  
+    noHay : numero
+  comenzar
+    flores:= 0
+    noHay:= 0 
+    repetir 99
+      si (HayFlorEnLaEsquina)
+        juntar (flores)
+      sino 
+        noHay := noHay + 1
+      mover
+    mientras (HayFlorEnLaBolsa)
+      depositarFlor
+    Informar (flores)
+    Informar (noHay)
+  fin
+
+variables
+  robot1 : tipo1
+  robot2 : tipo2
+  robot3 : tipo3
+comenzar
+  AsignarArea(robot1 , ciudad)
+  AsignarArea(robot2 , ciudad)
+  AsignarArea(robot3 , ciudad)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,3,1)
+  Iniciar(robot3,5,1)
+fin 

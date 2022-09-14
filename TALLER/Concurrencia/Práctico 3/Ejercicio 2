@@ -1,0 +1,89 @@
+programa Ejercicio2 
+procesos 
+  proceso juntarFlores (ES totalF : numero)
+  comenzar 
+    mientras HayFlorEnLaEsquina
+      tomarFlor 
+      totalF := totalF + 1 
+  fin
+
+  proceso juntarPapeles (ES totalP : numero)
+  comenzar 
+    mientras HayPapelEnLaEsquina 
+      tomarPapel 
+      totalP := totalP + 1 
+  fin
+
+  proceso rotar
+  comenzar 
+    repetir 3
+      derecha 
+  fin 
+  
+  proceso avanzarCalle (E sentido : numero)
+  comenzar 
+    mover {apenas me muevo, libero la esquina aterior }
+    LiberarEsquina (PosAv - sentido , PosCa)
+    repetir 2 
+      mover 
+    BloquearEsquina (PosAv + sentido , PosCa)
+    mover 
+  fin
+  proceso avanzarAvenida 
+  comenzar 
+    repetir 3 
+      BloquearEsquina (PosAv , PosCa + 1)
+      mover
+      LiberarEsquina (PosAv , PosCa - 1 )
+  fin
+
+areas 
+  aCarrera : AreaPC (1,1,9,100)
+robots 
+
+  robot cF 
+  variables 
+    flores : numero 
+  comenzar 
+    flores := 0 
+    repetir 5 
+      derecha 
+      avanzarCalle (1) 
+      juntarFlores (flores)
+      rotar
+      avanzarAvenida
+      rotar 
+      juntarFlores (flores)
+      avanzarCalle (-1)
+      derecha 
+      avanzarAvenida
+    Informar (flores)
+  fin
+
+  robot cP
+  variables 
+    papeles : numero 
+  comenzar 
+    papeles := 0 
+    repetir 5 
+      rotar 
+      avanzarCalle (-1)
+      juntarPapeles (papeles)
+      derecha 
+      avanzarAvenida
+      derecha
+      juntarPapeles (papeles)
+      avanzarCalle (1)
+      rotar
+      avanzarAvenida
+    Informar (papeles)
+  fin
+variables 
+  R1 : cF
+  R2 : cP 
+comenzar 
+  AsignarArea (R1 , aCarrera)
+  AsignarArea (R2 , aCarrera)
+  Iniciar (R1 , 1 , 1)
+  Iniciar (R2 , 9 , 1)
+fin

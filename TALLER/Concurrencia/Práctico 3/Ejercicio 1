@@ -1,0 +1,97 @@
+programa Ejercicio1
+procesos 
+  proceso juntarFlores (ES totalF : numero)
+  comenzar 
+    mientras HayFlorEnLaEsquina
+      tomarFlor 
+      totalF := totalF + 1 
+  fin
+
+  proceso juntarPapeles (ES totalP : numero)
+  comenzar 
+    mientras HayPapelEnLaEsquina 
+      tomarPapel 
+      totalP := totalP + 1 
+  fin
+
+areas
+  areaTodos : AreaC (10,10,10,10)
+  areaFloreros : AreaPC (1,1,5,10)
+  areaPapeleros : AreaPC (6,1,10,9)
+  areaFlorero1 : AreaP (6,10,6,10)
+  areaFlorero2 : AreaP (7,10,7,10)
+  areaPapelero1 : AreaP (8,10,8,10)
+  areaPapelero2 : AreaP (9,10,9,10)
+
+robots 
+  robot floreros 
+  variables 
+    flores , origenAv , origenCa , av , ca : numero 
+  comenzar 
+    flores := 0 
+    origenAv := PosAv 
+    origenCa := PosCa 
+
+    repetir 5 
+      Random (av , 1 , 5)
+      Random (ca , 1 , 10)
+      BloquearEsquina (av , ca) {bloqueo antes de ir}
+      Pos (av , ca)
+      juntarFlores (flores)
+      Pos (origenAv , origenCa) {vuelvo antes de desbloquear}
+      LiberarEsquina (av , ca)
+
+    repetir flores {una a una, flor por flor, bloquear - desbloquear bocha de veces}
+      BloquearEsquina (10 , 10)
+      Pos (10 , 10)
+      depositarFlor
+      Pos (origenAv , origenCa)
+      LiberarEsquina (10,10)
+  fin
+  robot papeleros
+  variables 
+    papeles , origenAv , origenCa , av , ca : numero 
+  comenzar 
+    papeles := 0 
+    origenAv := PosAv 
+    origenCa := PosCa 
+
+    repetir 3 
+      Random (av , 6 , 10)
+      Random (ca , 1 , 9)
+      BloquearEsquina (av , ca) {bloqueo antes de ir}
+      Pos (av , ca)
+      juntarPapeles (papeles)
+      Pos (origenAv , origenCa) {vuelvo antes de desbloquear}
+      LiberarEsquina (av , ca)
+
+    repetir papeles {una a una, flor por flor, bloquear - desbloquear bocha de veces}
+      BloquearEsquina (10 , 10)
+      Pos (10 , 10)
+      depositarFlor
+      Pos (origenAv , origenCa)
+      LiberarEsquina (10,10)
+  fin
+
+variables 
+  F1 , F2 : floreros 
+  P1 , P2 : papeleros 
+
+comenzar 
+  AsignarArea (F1 , areaFloreros)
+  AsignarArea (F1 , areaTodos)
+  AsignarArea (F1 , areaFlorero1)
+  AsignarArea (F2 , areaFloreros)
+  AsignarArea (F2 , areaTodos)
+  AsignarArea (F2 , areaFlorero2)
+  AsignarArea (P1 , areaPapeleros)
+  AsignarArea (P1 , areaTodos)
+  AsignarArea (P1 , areaPapelero1)
+  AsignarArea (P2 , areaPapeleros)
+  AsignarArea (P2 , areaTodos)
+  AsignarArea (P2 , areaPapelero2)
+  Iniciar (F1 , 6 , 10)
+  Iniciar (F2 , 7 , 10)
+  Iniciar (P1 , 8 , 10)
+  Iniciar (P2 , 9 , 10)
+fin
