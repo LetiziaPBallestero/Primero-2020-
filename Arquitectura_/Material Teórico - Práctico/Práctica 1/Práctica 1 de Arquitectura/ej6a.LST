@@ -1,0 +1,54 @@
+
+								p�gina: 1 
+
+ Listado Fuente: ej6a.LST
+ Programa Fuente en: ej6a.ASM
+ Fecha: Thu Oct 08 13:53:27 2020
+
+  Dir. Codigo maquina	 Linea 	 Codigo en lenguaje ensamble
+
+			      1	; El simulador no posee una instrucción para mu
+				ltiplicar números.
+			      2	; Escribir un programa para multiplicar los núm
+				eros
+			      3	; NUM1 y NUM2, y guardar el resultado en la vari
+				able RES
+			      4	
+			      5	;SIN LLAMADO A SUBRUTINA
+			      6	
+			      7	; PASAJE DE PARÁMETROS POR REGISTRO
+			      8	ORG 1000h
+ 1000 02 00		      9	  num1 DW 2
+ 1002 03 00		     10	  num2 DW 3 
+ 1004 03 00		     11	  res DW ? 
+			     12	ORG 2000h
+ 2000 BA 00 00		     13	  mov dx, 0 ; inicializo 
+ 2003 8A 06 00 10	     14	  mov al, num1 ; pongo en AL 2 
+ 2007 80 F8 00		     15	  CMP al, 0 ; comparo si AL con 0 ... 
+ 200A 74 12		     16	  JZ FIN ; si es 0 ( Z= 1) salto a fin, sino, si
+				go
+ 200C B4 00		     17	  mov ah, 0 ; en AH pongo 0 
+ 200E 8A 0E 02 10	     18	  mov cl, num2 ; en CL pongo 3, q va ser quien m
+				e lleve cuantas veces sumo el numero, o sea, por
+				 cuánto lo multiplico
+			     19	
+ 2012 80 F9 00		     20	LOOP: CMP cl, 0 ; compara CL con 0  
+ 2015 74 07		     21	  JZ FIN; si es 0 blablabla lo mismo de arriba 
+ 2017 03 D0		     22	  ADD dx, ax ; sumo en dx lo que está en ax 
+ 2019 FE C9		     23	  DEC cl ; decremento CL
+ 201B E9 12 20		     24	  JMP LOOP ; salto a LOOP 
+			     25	
+ 201E 89 16 04 10	     26	FIN: mov res, dx
+ 2022 F4		     27	  hlt 
+			     28	END
+
+
+ S I M B O L O S:
+
+ Nombre:	Tipo:		Valor:
+
+ num1    	Mem. Word	1000h
+ num2    	Mem. Word	1002h
+ res     	Mem. Word	1004h
+ LOOP    	Etiqueta	2012h
+ FIN     	Etiqueta	201Eh

@@ -1,0 +1,26 @@
+
+								página: 1 
+
+ Listado Fuente: ej4c.LST
+ Programa Fuente en: ej4c.ASM
+ Fecha: Thu Oct 08 13:32:04 2020
+
+  Dir. Codigo maquina	 Linea 	 Codigo en lenguaje ensamble
+
+			      1	ORG 1000h ; memoria de datos 
+ 1000 05 00		      2	  A DW 5h
+ 1002 06 00		      3	  B DW 6h
+ 1004 02 00		      4	  C DW 2h
+ 1006 02 00		      5	  D DW ? 
+			      6	ORG 3000h ; memoria de subrutinas
+ 3000 8B D0		      7	Calculo: mov dx, ax
+ 3002 03 D3		      8	  add dx , bx
+ 3004 2B D1		      9	  sub dx, cx
+ 3006 C3		     10	  ret
+			     11	ORG 2000h ; memoria de programa
+ 2000 8B 06 00 10	     12	  mov AX, A 
+ 2004 8B 1E 02 10	     13	  mov BX, B
+ 2008 8B 0E 04 10	     14	  mov CX, C
+ 200C E8 00 30		     15	  call Calculo
+ 200F 89 16 06 10	     16	  mov D, dx
+ 2013 F4		     17	  hlt

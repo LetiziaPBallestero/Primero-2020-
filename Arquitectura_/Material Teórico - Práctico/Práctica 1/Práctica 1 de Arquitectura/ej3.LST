@@ -1,0 +1,17 @@
+
+								p醙ina: 1 
+
+ Listado Fuente: ej3.LST
+ Programa Fuente en: ej3.ASM
+ Fecha: Thu Oct 08 11:43:46 2020
+
+  Dir. Codigo maquina	 Linea 	 Codigo en lenguaje ensamble
+
+			      1	org 3000h
+ 3000 BB 03 00		      2	rut: mov bx,3 ; Direcci贸n 3000h
+ 3003 C3		      3	ret ; Direcci贸n 3002h
+			      4	org 2000h
+ 2000 E8 00 30		      5	call rut ; Direcci贸n 2000h
+ 2003 81 C1 05 00	      6	add cx,5 ; Direcci贸n 2002h
+ 2007 E8 00 30		      7	call rut ; Direcci贸n 2004h
+ 200A F4		      8	hlt ; Direcci贸n 2006h

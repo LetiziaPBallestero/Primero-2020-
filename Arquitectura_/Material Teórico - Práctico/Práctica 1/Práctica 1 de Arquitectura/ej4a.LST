@@ -1,0 +1,33 @@
+
+								página: 1 
+
+ Listado Fuente: ej4a.LST
+ Programa Fuente en: ej4a.ASM
+ Fecha: Thu Oct 08 13:15:20 2020
+
+  Dir. Codigo maquina	 Linea 	 Codigo en lenguaje ensamble
+
+			      1	; memoria de datos 
+			      2	org 1000h
+ 1000 05 00		      3	  A DW 5h
+ 1002 06 00		      4	  B DW 6h
+ 1004 02 00		      5	  C DW 2h
+ 1006 02 00		      6	  D DW ?
+			      7	; memoria de programa 
+			      8	org 2000h
+ 2000 8B 06 00 10	      9	  mov ax, A ; pongo A en el registro  
+ 2004 03 06 02 10	     10	  add ax, B ; sumo B a A 
+ 2008 2B 06 04 10	     11	  sub ax, C ; le resto C ...
+ 200C 89 06 06 10	     12	  mov D, ax ; todo lo guardo en D 
+ 2010 F4		     13	hlt 
+			     14	end
+
+
+ S I M B O L O S:
+
+ Nombre:	Tipo:		Valor:
+
+ A       	Mem. Word	1000h
+ B       	Mem. Word	1002h
+ C       	Mem. Word	1004h
+ D       	Mem. Word	1006h
